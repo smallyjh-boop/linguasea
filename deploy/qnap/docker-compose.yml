@@ -21,7 +21,7 @@ services:
 
   api:
     # Built by GitHub Actions from the main branch (amd64 and arm64). To update: pull the image again and recreate.
-    image: ghcr.io/oct17b-stack/linguasea:latest
+    image: ghcr.io/smallyjh-boop/linguasea:latest
     restart: unless-stopped
     depends_on:
       db:

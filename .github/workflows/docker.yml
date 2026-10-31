@@ -1,5 +1,5 @@
 # Server image (API + web app at /app/) for self-hosting, e.g. on a QNAP NAS (docs/DEPLOY-QNAP.md).
-# Runs after CI passes on main and publishes ghcr.io/oct17b-stack/linguasea:latest (and :<commit>)
+# Runs after CI passes on main and publishes ghcr.io/smallyjh-boop/linguasea:latest (and :<commit>)
 # for amd64 and arm64. Needs no secrets: GITHUB_TOKEN can write this repository's packages.
 name: Docker image
 
