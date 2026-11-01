@@ -1,6 +1,6 @@
 # 开发约定（给接手的开发者 / AI）
 
-用户说中文，回复一律用中文。**接手先读 docs/NEXT-STEPS.md（下一步备忘）、docs/TEST-REPORT.md（最近一次综合测试结果和没修的问题）、docs/HANDOVER.md（交接文档：用户要求、现状、已知问题）和 docs/ROADMAP.md（路线图）。** 产品方案在 docs/PLAN.md，内容规范在 docs/CONTENT.md，上线清单在 docs/LAUNCH.md，用智能体批量写课 / 审校的流水线和提示词在 docs/prompts/。
+用户说中文，回复一律用中文。**接手先读 docs/NEXT-STEPS.md（下一步备忘）、docs/TASKS.md（任务清单）、docs/TEST-REPORT.md（最近一次综合测试结果和没修的问题）、docs/HANDOVER.md（交接文档：用户要求、现状、已知问题）和 docs/ROADMAP.md（路线图）。** 产品方案在 docs/PLAN.md，内容规范在 docs/CONTENT.md，上线清单在 docs/LAUNCH.md，用智能体批量写课 / 审校的流水线和提示词在 docs/prompts/。
 
 ## 仓库结构
 
@@ -18,6 +18,7 @@
 | `content/audio/` | 生成的配音和清单 |
 | `server/public/` | 官网、客服页、`/legal/` 法律页面 |
 | `tests/e2e/` | 端到端测试工具（真服务器 + 网页版 + 浏览器）；`smoke.mjs` 检查已部署的服务器 |
+| `.claude/` | 本项目的斜杠命令（`commands/`）和子代理（`agents/`），见下面「工作方式」 |
 | `deploy/qnap/` | 威联通 NAS 的 Container Station 部署文件（说明见 docs/DEPLOY-QNAP.md）；镜像由 `.github/workflows/docker.yml` 构建 |
 
 ## 架构要点
@@ -65,6 +66,14 @@ npm run smoke -- http://<NAS IP>:8090   # 检查已部署的服务器（先 npm 
 - 服务器不配 `DATABASE_URL` 时用内存存储，只能开发用。
 - 课程内容是 AI 写的并经 AI 审校，上线前必须请母语老师终审（`content/_review/`）。
 - `app/src/lib/config.ts` 的客服邮箱、法律页面里的 `[TBD]` / `[รอกรอก]` 占位要换成真实信息。
+
+## 工作方式（2026-11-01 起按这个执行）
+
+- **任务在 docs/TASKS.md**：`/plan <需求>`（Opus）拆成小任务写进去，只规划不写代码；`/go [编号]`（Sonnet）一次做一项：实现 → `npm run check`（改了界面加 `npm run e2e`）→ 提交推送 → 勾选并同步 NEXT-STEPS。标"店主"的任务和要等密钥 / 账号的不做。**docs/PLAN.md 是产品方案，不当任务清单用。**
+- **其他命令**：`/fix <现象>` 修 bug（最小改动 + 测试）；`/test [e2e|smoke <网址>]` 只看检查结论；`/review` 交给 reviewer 审改动；`/commit` 按「范围：中文说明」提交（不推送）；`/i18n <母语>` 以泰语为准补其他母语；`/handover` 会话结束前更新 NEXT-STEPS / TASKS（不压缩已有内容）。
+- **子代理**（`.claude/agents/`）：大范围找代码、找词条交给 `code-searcher`（Haiku，跳过 content/audio 和生成的内容包）；跑检查看报错交给 `test-runner`（Haiku，只要结论）；审改动交给 `reviewer`（Opus，查 id 不改、两层同步、密钥）；翻译交给 `translator`（Haiku，以泰语为准）。
+- 只读完成任务需要的文件；不读 node_modules、`content/audio/`、`app/src/content/generated/`、大 JSON。回复简洁：改了什么、为什么、检查结果。
+- 每完成一项都提交推送到 `main`，并更新 docs/TASKS.md 和 docs/NEXT-STEPS.md。新会话要开在 **linguasea** 环境（有 Azure 密钥），不是 Default。
 
 ## 安全约定
 
