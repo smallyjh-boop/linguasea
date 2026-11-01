@@ -15,7 +15,7 @@
 - **只有用户本人做**：品牌名定稿、开发者账号和付款主体、所有密钥和商店后台、价格定稿、上架发布、请母语老师和律师。密钥一律不进仓库，由用户填进云端环境变量（变量名见 `docs/LAUNCH.md` 和 `server/.env.example`）。
 - 内容目标：每门课 A–F 学习时长 ≥ 200 小时（`npm run hours`，口径见 docs/CONTENT.md §6）。
 - 可以多开智能体加快进度（上限 20 个并发）。
-- 每次结束前把改动提交并推送到工作分支（当前是 `oct17b-stack/linguasea` 的 `main`）。
+- 每次结束前把改动提交并推送到工作分支（当前是 `smallyjh-boop/linguasea` 的 `main`；2026-11-01 从 `oct17b-stack/linguasea` 迁来，旧仓库不再用）。
 - 完成后要把所有信息、提示词、路线图放进仓库，方便交接（就是本文件、`docs/ROADMAP.md`、`docs/prompts/`）。
 
 用户的原话（按时间）：
@@ -36,12 +36,13 @@
 15. 我还没部署的情况下能先把密钥给你你先把音频跑出来吗；先测试通过再付费（先用各服务的免费额度）
 16. 同步一下工作进度和目前项目的进展情况，并且需要部署到威联通 NAS 先测试，以便后期发到 App 市场
 17. 更新一下子代理和任务规划，完成后以后就按这个方案执行，但是暂时不继续开发（2026-11-01：命令和子代理放进 `.claude/`，任务清单 docs/TASKS.md，见 CLAUDE.md「工作方式」）
+18. 将仓库 smallyjh-boop/linguasea 克隆到此会话中；搬过去吧
 
 ## 3. 现在的状态
 
 **代码：功能全部做完，等密钥和账号对接。**
 
-- 部署：可以先部署到店主的威联通 NAS 测试（docs/DEPLOY-QNAP.md、`deploy/qnap/`），镜像由 `.github/workflows/docker.yml` 自动构建到 `ghcr.io/oct17b-stack/linguasea`；`npm run smoke -- <网址>` 检查已部署的服务器。
+- 部署：可以先部署到店主的威联通 NAS 测试（docs/DEPLOY-QNAP.md、`deploy/qnap/`），镜像由 `.github/workflows/docker.yml` 自动构建到 `ghcr.io/smallyjh-boop/linguasea`；`npm run smoke -- <网址>` 检查已部署的服务器。
 
 - App（`app/`）：选课、课程地图（正课、读物、练习课、单元测验）、上课、FSRS 复习、分级测试、AI 口语老师（文字 + 语音）、发音打分、付费墙（RevenueCat）、连胜和 XP、每日提醒、设置和删除数据；进度存本地文件并同步到服务器（先自动建匿名账号；可选用邮箱验证码登录，手机和网页共用进度和订阅）。网页版在 `<服务器>/app/`（同一套代码 `expo export --platform web`，`app.json` 的 `experiments.baseUrl`），网页付费走 RevenueCat Web Billing（Stripe），网页上要先登录才能买。
 - 服务器（`server/`）：账号、邮箱验证码登录（Resend 发信，每台设备一个令牌，登录时合并匿名账号，旧账号 id 留别名让续费事件找得到）、进度同步、订阅 webhook（含 TRANSFER）、发音打分和语音转文字（Azure）、AI 老师（Claude）、官网 / 客服页 / 法律页、配音文件。不配 `DATABASE_URL` 时用内存存储。

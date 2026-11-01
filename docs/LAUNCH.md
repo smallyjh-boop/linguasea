@@ -119,7 +119,7 @@
 
 ### 7.2 API 服务器（Docker）
 
-> 先在自己的威联通 NAS 上测试：docs/DEPLOY-QNAP.md（GitHub 自动构建的镜像 `ghcr.io/oct17b-stack/linguasea`，Container Station 里粘贴一份 YAML 就能跑）。部署完用 `npm run smoke -- <服务器网址>` 从外面检查一遍。
+> 先在自己的威联通 NAS 上测试：docs/DEPLOY-QNAP.md（GitHub 自动构建的镜像 `ghcr.io/smallyjh-boop/linguasea`，Container Station 里粘贴一份 YAML 就能跑）。部署完用 `npm run smoke -- <服务器网址>` 从外面检查一遍。
 
 - **在哪里**：任选一家能跑 Docker、有新加坡区域的平台，例如 Fly.io（sin）、Render（Singapore）、Railway、DigitalOcean App Platform（SGP）、Google Cloud Run（asia-southeast1）。
 - **做什么**：

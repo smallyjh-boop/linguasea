@@ -1,6 +1,6 @@
 # API server image with the web app at /app/. Build from the repo root:
 #   docker build -t linguasea-api .
-# Ready-made images (amd64 and arm64) are published to ghcr.io/oct17b-stack/linguasea by
+# Ready-made images (amd64 and arm64) are published to ghcr.io/smallyjh-boop/linguasea by
 # .github/workflows/docker.yml; deploy/qnap/ runs one on a QNAP NAS (docs/DEPLOY-QNAP.md).
 
 # --- Web build of the app (expo export --platform web) -------------------------------------------

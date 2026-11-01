@@ -12,7 +12,7 @@
 | `api` | LinguaSEA 服务器：接口、网页版 App（`/app/`）、官网和法律页、配音文件 |
 | `tunnel`（可选） | Cloudflare 隧道：给服务器一个 https 网址，手机在外面也能连（第 5 步） |
 
-镜像 `ghcr.io/oct17b-stack/linguasea:latest` 由 GitHub 自动构建（`.github/workflows/docker.yml`）：每次推送到 `main`、检查通过后自动更新，Intel/AMD（x86）和 ARM 的 NAS 都能用，NAS 上不用编译。
+镜像 `ghcr.io/smallyjh-boop/linguasea:latest` 由 GitHub 自动构建（`.github/workflows/docker.yml`）：每次推送到 `main`、检查通过后自动更新，Intel/AMD（x86）和 ARM 的 NAS 都能用，NAS 上不用编译。
 
 ## 1. 准备
 
@@ -23,9 +23,9 @@
 
 ## 2. 第一次：确认镜像能下载
 
-1. 浏览器打开 https://github.com/oct17b-stack/linguasea/actions ，看 **Docker image** 这一项是绿色 ✓（第一次大约 15–30 分钟）。
-2. 打开 https://github.com/oct17b-stack/linguasea/pkgs/container/linguasea 。
-3. 如果页面右边显示 **Private**：点 **Package settings** → 最下面 **Change visibility** → 选 **Public** → 输入包名确认。（仓库本身是公开的，镜像里的东西和仓库一样，没有密钥。设成公开后 NAS 不用登录就能下载。）这一步只做一次。
+1. 浏览器打开 https://github.com/smallyjh-boop/linguasea/actions ，看 **Docker image** 这一项是绿色 ✓（第一次大约 15–30 分钟）。
+2. 打开 https://github.com/smallyjh-boop/linguasea/pkgs/container/linguasea 。
+3. 如果页面右边显示 **Private**：点 **Package settings** → 最下面 **Change visibility** → 选 **Public** → 输入包名确认。（仓库本身是公开的，镜像里的东西和仓库一样，没有密钥。设成公开后 NAS 不用登录就能下载。）这一步只做一次。**注意**：2026-11-01 仓库迁到了 `smallyjh-boop/linguasea`，新仓库第一次构建出的镜像默认可能是 Private，要按这一步重新设成 Public（以前在 `oct17b-stack` 下设过的不算）。
 
 ## 3. 在 Container Station 里创建
 
@@ -84,7 +84,7 @@
 
 GitHub 上每次更新 `main` 后（约 30 分钟镜像构建好）：
 
-1. Container Station → **映像**（Images）→ **拉取**（Pull）→ 填 `ghcr.io/oct17b-stack/linguasea:latest` → 拉取。
+1. Container Station → **映像**（Images）→ **拉取**（Pull）→ 填 `ghcr.io/smallyjh-boop/linguasea:latest` → 拉取。
 2. **应用程序** → `linguasea` → **重新创建**（Recreate）。
 
 数据库在 `db` 卷里，更新不会丢数据。（会用 SSH 的话，也可以在应用程序目录里运行 `docker compose pull && docker compose up -d`。）
