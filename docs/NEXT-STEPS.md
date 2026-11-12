@@ -44,7 +44,7 @@
 
 ### 0b. 现在：部署到威联通 NAS 测试（docs/DEPLOY-QNAP.md）
 
-**2026-11-12：店主已部署到正式服务器（一开始打不开，后来能打开），进入部署测试阶段。** 下一步：店主把网址告诉 AI 跑 `npm run smoke`（T8）。店主试用后反馈："非图形化、没讲解的学法正常人学不会"——现在讲解只有文字且排在单词之后、全 App 没有图片；**店主决定：参考 Duolingo（不全照搬，也参考 HelloChinese / LingoDeer / Super Chinese），认字部分要有考试型的填空、阅读；先做完"大手术"再上线。** 任务拆在 docs/TASKS.md 的 T15–T24：先做设计稿 T15，店主确认（T16）后再开发。 **2026-11-12 设计稿已交**：docs/LEARNING-DESIGN.md（§8 有 5 个要店主定的问题）和 docs/design/（草图，`overview.png` 是总览），等店主回复。
+**2026-11-12：店主已部署到正式服务器（一开始打不开，后来能打开），进入部署测试阶段。** 下一步：店主把网址告诉 AI 跑 `npm run smoke`（T8）。店主试用后反馈："非图形化、没讲解的学法正常人学不会"——现在讲解只有文字且排在单词之后、全 App 没有图片；**店主决定：参考 Duolingo（不全照搬，也参考 HelloChinese / LingoDeer / Super Chinese），认字部分要有考试型的填空、阅读；先做完"大手术"再上线。** 任务拆在 docs/TASKS.md 的 T15–T24：先做设计稿 T15，店主确认（T16）后再开发。 **2026-11-12 设计稿已交**，店主看后说"语音更重要，要先说出来才有信心，前期可以用短语，不要太长，要有趣"，已改版为"先开口"：docs/LEARNING-DESIGN.md（§0 核心原则，§8 有 5 个要店主定的问题，含免费用户发音打分次数）和 docs/design/（8 张草图，`overview.png` 是总览），等店主回复。正式服务器要填 Azure 语音密钥，发音打分才工作。
 
 GitHub 会自动构建服务器镜像（`ghcr.io/smallyjh-boop/linguasea`，x86 和 ARM 的 NAS 都能用）。按 docs/DEPLOY-QNAP.md：第一次把镜像设成 Public（第 2 步）→ Container Station → 应用程序 → 创建，粘贴 `deploy/qnap/docker-compose.yml`，改两处数据库密码 → 浏览器打开 `http://<NAS IP>:8090/app/`。要在外面用手机测、或者以后做手机内测版，按第 5 步加 https 网址（临时的不用注册；固定的要等买好域名）。部署好后把网址告诉 AI，它用 `npm run smoke -- <网址>` 从外面检查一遍。
 
