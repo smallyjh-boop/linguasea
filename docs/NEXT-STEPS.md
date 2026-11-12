@@ -44,6 +44,8 @@
 
 ### 0b. 现在：部署到威联通 NAS 测试（docs/DEPLOY-QNAP.md）
 
+**2026-11-12：店主已在 NAS 上装好测试站，一开始打不开，后来能打开了（局域网）。** 下一步：店主在网页版实际上几节课；要在外面用手机测就开第 5a 步的临时 https 网址，把网址告诉 AI 跑 `npm run smoke`（T8）。
+
 GitHub 会自动构建服务器镜像（`ghcr.io/smallyjh-boop/linguasea`，x86 和 ARM 的 NAS 都能用）。按 docs/DEPLOY-QNAP.md：第一次把镜像设成 Public（第 2 步）→ Container Station → 应用程序 → 创建，粘贴 `deploy/qnap/docker-compose.yml`，改两处数据库密码 → 浏览器打开 `http://<NAS IP>:8090/app/`。要在外面用手机测、或者以后做手机内测版，按第 5 步加 https 网址（临时的不用注册；固定的要等买好域名）。部署好后把网址告诉 AI，它用 `npm run smoke -- <网址>` 从外面检查一遍。
 
 ### 1. Azure 语音（免费层）→ 先跑配音（✅ 已完成，留作参考）
